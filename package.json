@@ -2,7 +2,7 @@
   "name": "evm-auto-sender",
   "version": "1.0.3",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/src/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/onekill0503/evm-auto-sender.git"
