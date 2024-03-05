@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onekill0503/evm-auto-sender.git"
+  },
   "scripts": {
     "start": "npx tsc && node ./dist/index.js",
     "dev": "npx ts-node index.ts"

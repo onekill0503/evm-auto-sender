@@ -1,10 +1,11 @@
-import { AddressLike, Wallet, ethers } from 'ethers';
-import provider from './provider';
+import { AddressLike, Provider, Wallet, ethers } from 'ethers';
 
 class WalletManager {
     _wallet: Wallet;
-    constructor(pk: string){
-        this._wallet = new ethers.Wallet(pk , provider);
+    _provider: Provider;
+    constructor(pk: string, rpc: string){
+        this._provider = new ethers.JsonRpcProvider(rpc);
+        this._wallet = new ethers.Wallet(pk , this._provider);
     }
 
     public async send_to(address: AddressLike , amount: string): Promise<string>{
@@ -24,11 +25,11 @@ class WalletManager {
         return transaction.hash;
     }
     async check_balance(): Promise<bigint> {
-        return await provider.getBalance(this._wallet.address)
+        return await this._provider.getBalance(this._wallet.address)
     }
 
     async getGas(): Promise<bigint | null> {
-        return (await provider.getFeeData()).gasPrice
+        return (await this._provider.getFeeData()).gasPrice
     }
 
 }
