@@ -9,6 +9,7 @@
   },
   "scripts": {
     "start": "npx tsc && node ./dist/index.js",
+    "build": "npx tsc",
     "dev": "npx ts-node index.ts"
   },
   "keywords": ["eth","evm","automation","blockchain","transaction"],
