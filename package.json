@@ -1,6 +1,6 @@
 {
   "name": "autosender",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "repository": {
@@ -11,12 +11,11 @@
     "start": "npx tsc && node ./dist/index.js",
     "dev": "npx ts-node index.ts"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["eth","evm","automation","blockchain","transaction"],
+  "author": "AlwaysBeDream",
   "license": "ISC",
   "dependencies": {
     "@types/node": "^20.11.24",
-    "dotenv": "^16.4.5",
     "ethers": "^6.11.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
