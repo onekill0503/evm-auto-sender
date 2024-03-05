@@ -1,5 +1,5 @@
 {
-  "name": "autosender",
+  "name": "evm-auto-sender",
   "version": "1.0.3",
   "description": "",
   "main": "index.js",
@@ -10,14 +10,21 @@
   "scripts": {
     "start": "npx tsc && node ./dist/index.js",
     "build": "npx tsc",
-    "dev": "npx ts-node index.ts"
+    "dev": "npx ts-node ./src/index.ts"
   },
-  "keywords": ["eth","evm","automation","blockchain","transaction"],
+  "keywords": [
+    "eth",
+    "evm",
+    "automation",
+    "blockchain",
+    "transaction"
+  ],
   "author": "AlwaysBeDream",
   "license": "ISC",
   "dependencies": {
     "@types/node": "^20.11.24",
     "ethers": "^6.11.1",
+    "ora": "^5.4.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   }

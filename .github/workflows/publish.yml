@@ -1,0 +1,25 @@
+name: "🚀 Publish NPM"
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  release:
+    name: 🚀 Publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📚 Checkout
+        uses: actions/checkout@v4.1.1
+      - name: 🟢 Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          registry-url: https://registry.npmjs.org
+      - name: 🚀 Publish
+        run: npm publish --access public
+        working-directory: evm-auto-sender
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_ACCESS_TOKEN}}
+       

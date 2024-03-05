@@ -14,13 +14,11 @@ class WalletManager {
         
         if(transac_amount > current_balance) throw Error(`Balance to low !`);
 
-        console.log(`Current Balance : ${current_balance.toString()}`);
         const transaction = await this._wallet.sendTransaction({
             to: address,
             value: ethers.parseEther(amount),
             gasPrice: await this.getGas()
         });
-        console.log(`Hash : ${transaction.hash}`);
         await transaction.wait();
         return transaction.hash;
     }

@@ -5,7 +5,7 @@ type EVMConstructorParam  = {
     listTarget?: AddressLike[];
     delay?: number;
     randomTarget: boolean;
-    randomAmount: boolean;
+    randomAmount?: boolean;
     amount?: string;
     rpc: string;
 }
