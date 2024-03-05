@@ -19,7 +19,6 @@ jobs:
           registry-url: https://registry.npmjs.org
       - name: 🚀 Publish
         run: npm publish --access public
-        working-directory: evm-auto-sender
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_ACCESS_TOKEN}}
        
