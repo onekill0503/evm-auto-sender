@@ -1,8 +1,8 @@
 {
   "name": "evm-auto-sender",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "",
-  "main": "./dist/src/index.js",
+  "main": "./dist/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/onekill0503/evm-auto-sender.git"
@@ -24,7 +24,9 @@
   "dependencies": {
     "@types/node": "^20.11.24",
     "ethers": "^6.11.1",
-    "ora": "^5.4.1",
+    "ora": "^5.4.1"
+  },
+  "devDependencies": {
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   }
