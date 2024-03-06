@@ -5,6 +5,7 @@ import ora, { Ora } from 'ora';
 import { arrowSpinner } from './utils/spinner';
 import { generateRandomDecimalInRange } from './utils/random';
 import { Big } from 'big.js'
+import { Delay } from './utils/time';
 
 class EVMAutoSender {
     _senderWallet: WalletManager;
@@ -40,6 +41,7 @@ class EVMAutoSender {
         const amount = this.getAmount();
         const hash = await this._senderWallet.send_to(newWallet.address , amount);
         this._spinner.succeed(`Successfully sent ${amount} transaction with hash ${hash}`);
+        await Delay(this._delay);
         return true;
     }
     
@@ -50,6 +52,7 @@ class EVMAutoSender {
             const hash = await this._senderWallet.send_to(address , amount);
             this._spinner.succeed(`Successfully sent ${amount} transaction with hash ${hash}`);
         }
+        await Delay(this._delay);
         return false;
     }
 
