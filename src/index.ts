@@ -3,6 +3,8 @@ import WalletManager from './utils/wallet';
 import EVMConstructorParam from './models/EVMContrustorParam';
 import ora, { Ora } from 'ora';
 import { arrowSpinner } from './utils/spinner';
+import { generateRandomDecimalInRange } from './utils/random';
+import { Big } from 'big.js'
 
 class EVMAutoSender {
     _senderWallet: WalletManager;
@@ -11,6 +13,8 @@ class EVMAutoSender {
     _amount: string;
     _randomTarget: boolean;
     _randomAmount: boolean;
+    _minAmount?: string;
+    _maxAmount?: string;
     _spinner: Ora = ora({ spinner: arrowSpinner });
 
     constructor(param: EVMConstructorParam){
@@ -20,6 +24,8 @@ class EVMAutoSender {
         this._randomTarget = param.randomTarget;
         this._randomAmount = param.randomAmount ?? false;
         this._amount = param.amount ?? "0.00000001";
+        this._minAmount = param.minAmount;
+        this._maxAmount = param.maxAmount;
     }
 
     async send(): Promise<boolean>{
@@ -31,18 +37,25 @@ class EVMAutoSender {
     async sendRandom(): Promise<boolean>{
         const newWallet = ethers.Wallet.createRandom();
         this._spinner.text = `Sending to wallet : ${newWallet.address}`;
-        const hash = await this._senderWallet.send_to(newWallet.address , this._amount);
-        this._spinner.succeed(`Successfully sent ${this._amount} transaction with hash ${hash}`);
+        const amount = this.getAmount();
+        const hash = await this._senderWallet.send_to(newWallet.address , amount);
+        this._spinner.succeed(`Successfully sent ${amount} transaction with hash ${hash}`);
         return true;
     }
     
     async sendList(listAddress: AddressLike[] = []): Promise<boolean>{
         for(const address of listAddress){
             this._spinner.text = `Sending to wallet : ${address}`;
-            const hash = await this._senderWallet.send_to(address , this._amount);
-            this._spinner.succeed(`Successfully sent ${this._amount} transaction with hash ${hash}`);
+            const amount = this.getAmount();
+            const hash = await this._senderWallet.send_to(address , amount);
+            this._spinner.succeed(`Successfully sent ${amount} transaction with hash ${hash}`);
         }
         return false;
+    }
+
+    getAmount(): string {
+        if(this._randomAmount) return generateRandomDecimalInRange(new Big(this._minAmount ?? "0.00002") , new Big(this._maxAmount ?? "0.00001"))
+        else return this._amount;
     }
 
     public async start(): Promise<void> {
